@@ -1,0 +1,124 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id Int @id @default(autoincrement())
+  email String @unique
+  contrasena String
+  jugador Jugador?
+}
+
+model Jugador {
+  id Int @id @default(autoincrement())
+  nombre String
+  carnet Int @unique
+  telefono String
+  direccion String
+  usuario Usuario @relation(fields: [usuarioId], references: [id])
+  usuarioId Int @unique
+  participante Participante[]
+  cuenta Cuenta[]
+}
+
+model Juego {
+  id Int @id @default(autoincrement())
+  moneda String
+  montoPago Int
+  nombreJuego String
+  cantidadJugadores Int
+  periodoRonda String
+  fechaInicio DateTime
+  estado String
+  participante Participante[]
+  ronda Ronda[]
+}
+
+model Rol {
+  id Int @id @default(autoincrement())
+  nombre String
+  descripcion String
+  participante Participante[]
+}
+
+model Participante {
+  id Int @id @default(autoincrement())
+  jugador Jugador @relation(fields: [jugadorId], references: [id])
+  jugadorId Int
+  juego Juego @relation(fields: [juegoId], references: [id])
+  juegoId Int
+  fechaInscripcion DateTime
+  estado String
+  montoPagado Int
+  montoGanado Int
+  fechaPago DateTime
+  fechaGanado DateTime
+  rol Rol @relation(fields: [rolId], references: [id])
+  rolId Int  
+  rondaGanada Ronda?
+  transferencia Transferencia[]
+  oferta Oferta[]
+  invitacion Invitacion[]
+}
+
+model Ronda {
+  id Int @id @default(autoincrement())
+  juego Juego @relation(fields: [juegoId], references: [id])
+  juegoId Int
+  nroRonda Int
+  idGanadorRonda Int @unique
+  participanteGanador Participante @relation(fields: [idGanadorRonda], references: [id])
+}
+
+model Transferencia {
+  id Int @id @default(autoincrement())
+  fechaTransferencia DateTime
+  tipoTransferencia String
+  montoTransferencia Int
+  participante Participante @relation(fields: [participanteId], references: [id])
+  participanteId Int
+  estado String
+}
+
+model Oferta {
+  id Int @id @default(autoincrement())
+  fechaHoraOferta DateTime
+  montoOferta Int
+  participante Participante @relation(fields: [participanteId], references: [id])
+  participanteId Int
+}
+
+model Invitacion {
+  id Int @id @default(autoincrement())
+  fechaHoraInvitacion DateTime
+  participante Participante @relation(fields: [participanteId], references: [id])
+  participanteId Int
+  email String
+  telefono String
+  descripcion String
+  enlace String
+  fechaExpiracion DateTime
+}
+
+model Cuenta {
+  id Int @id @default(autoincrement())
+  nombre String
+  codSecreto String
+  nroTarjeta String
+  fechaVencimiento DateTime
+  nroCuenta String
+  fechaHoraRegistro DateTime
+  idJugador Int @unique
+  jugador Jugador @relation(fields: [idJugador], references: [id])
+}
