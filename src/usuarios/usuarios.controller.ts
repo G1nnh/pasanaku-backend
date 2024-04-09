@@ -1,7 +1,8 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { UsuariosService } from './usuarios.service';
-import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
+import { InvitarUsuarioDto } from './dto/invitar-usuario.dto';
+import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @Controller('usuarios')
@@ -12,6 +13,11 @@ export class UsuariosController {
   @Post()
   create(@Body() createUsuarioDto: CreateUsuarioDto) {
     return this.usuariosService.create(createUsuarioDto);
+  }
+
+  @Post('invitar')
+  crear(@Body() InvitarUsuarioDto: InvitarUsuarioDto) {
+    return this.usuariosService.crear(InvitarUsuarioDto);
   }
 
   @Get()
