@@ -9,6 +9,7 @@ async function bootstrap() {
     .setTitle('Pasanaku Backend API')
     .setDescription('The Pasanaku Backend API description')
     .setVersion('0.1')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
