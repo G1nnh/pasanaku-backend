@@ -7,6 +7,9 @@ export class InvitarUsuarioDto {
     @ApiProperty()
     contrasena: string;
 
+    @ApiProperty()
     telefono: string;
+    
+    @ApiProperty()
     nombre: string;
 }
