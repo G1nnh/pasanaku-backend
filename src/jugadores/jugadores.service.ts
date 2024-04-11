@@ -7,8 +7,15 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class JugadoresService {
   constructor (private prisma: PrismaService) {}
 
-  create(createJugadoreDto: CreateJugadoresDto) {
-    return this.prisma.jugador.create({ data: createJugadoreDto });
+ async create(createJugadoreDto: CreateJugadoresDto) {
+    const jugador = await this.prisma.jugador.create({
+      data: {
+        nombre: createJugadoreDto.nombre,
+        telefono: createJugadoreDto.telefono,
+        usuarioId: Number(createJugadoreDto.usuarioId),
+      },
+    });
+    return jugador;
   }
 
   findAll() {

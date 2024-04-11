@@ -1,10 +1,9 @@
 import { ApiProperty } from "@nestjs/swagger";
 
-export class CreateJugadoresDto {
+export class CreateEstadoDto {
     @ApiProperty()
     nombre: string;
+
     @ApiProperty()
-    telefono: string;
-    @ApiProperty()
-    usuarioId: number;
+    descripcion: string;
 }
