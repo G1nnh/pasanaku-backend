@@ -5,20 +5,17 @@ export class CreateJuegoDto {
     moneda: string;
 
     @ApiProperty()
-    montoPago: number;
+    montoPago: Number;
     
     @ApiProperty()
     nombreJuego: string;
 
     @ApiProperty()
-    cantidadJugadores: number;
+    cantidadJugadores: Number;
 
     @ApiProperty()
     periodoRonda: string;
 
     @ApiProperty()
-    fechaInicio: Date;
-
-    @ApiProperty()
-    estado: string;
+    estadoId: Number;
 }

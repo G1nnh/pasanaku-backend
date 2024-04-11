@@ -24,10 +24,10 @@ export class JuegosController {
     return this.juegosService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateJuegoDto: UpdateJuegoDto) {
-    return this.juegosService.update(+id, updateJuegoDto);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateJuegoDto: UpdateJuegoDto) {
+  //   return this.juegosService.update(+id, updateJuegoDto);
+  // }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
