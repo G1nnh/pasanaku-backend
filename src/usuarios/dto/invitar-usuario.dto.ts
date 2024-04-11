@@ -1,10 +1,12 @@
 import { ApiProperty } from "@nestjs/swagger";
 
-export class CreateJugadoresDto {
+export class InvitarUsuarioDto {
     @ApiProperty()
-    nombre: string;
+    email: string;
+
     @ApiProperty()
+    contrasena: string;
+
     telefono: string;
-    @ApiProperty()
-    usuarioId: number;
+    nombre: string;
 }

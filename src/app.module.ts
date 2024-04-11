@@ -8,9 +8,16 @@ import { RolesModule } from './roles/roles.module';
 import { CuentasModule } from './cuentas/cuentas.module';
 import { JuegosModule } from './juegos/juegos.module';
 import { AuthModule } from './auth/auth.module';
+import { MailsModule } from './mails/mails.module';
+import { ConfigModule } from '@nestjs/config';
+import { EstadosModule } from './estados/estados.module';
+import { InvitacionesModule } from './invitaciones/invitaciones.module';
+import { ParticipantesModule } from './participantes/participantes.module';
 
 @Module({
-  imports: [PrismaModule, UsuariosModule, RolesModule, CuentasModule, JuegosModule, JugadoresModule, AuthModule],
+  imports: [PrismaModule, UsuariosModule, RolesModule, CuentasModule, JuegosModule, JugadoresModule, MailsModule,ConfigModule.forRoot({
+    isGlobal: true,
+  }), EstadosModule, InvitacionesModule, ParticipantesModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -1,10 +1,13 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { UsuariosService } from './usuarios.service';
-import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
+import { InvitarUsuarioDto } from './dto/invitar-usuario.dto';
+import { CreateUsuarioDto } from './dto/create-usuario.dto';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { UsuarioEntity } from './entities/usuario.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+
 
 @Controller('usuarios')
 @ApiTags('usuarios')
@@ -15,6 +18,11 @@ export class UsuariosController {
   @ApiCreatedResponse({ type: UsuarioEntity })
   create(@Body() createUsuarioDto: CreateUsuarioDto) {
     return this.usuariosService.create(createUsuarioDto);
+  }
+
+  @Post('invitar')
+  crear(@Body() InvitarUsuarioDto: InvitarUsuarioDto) {
+    return this.usuariosService.crear(InvitarUsuarioDto);
   }
 
   @Get()

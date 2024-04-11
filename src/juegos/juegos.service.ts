@@ -7,8 +7,18 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class JuegosService {
   constructor(private prisma: PrismaService) {}
 
-  create(createJuegoDto: CreateJuegoDto) {
-    return this.prisma.juego.create({data: createJuegoDto});
+  async create(createJuegoDto: CreateJuegoDto) {
+    const juego = await this.prisma.juego.create({
+      data: {
+        moneda: createJuegoDto.moneda,
+        montoPago: Number(createJuegoDto.montoPago),
+        nombreJuego: createJuegoDto.nombreJuego,
+        cantidadJugadores: Number(createJuegoDto.cantidadJugadores),
+        periodoRonda: createJuegoDto.periodoRonda,
+        estadoId: Number(createJuegoDto.estadoId),
+      },
+    });
+    return juego;
   }
 
   findAll() {
@@ -19,12 +29,12 @@ export class JuegosService {
     return this.prisma.juego.findUnique({where: { id } });
   }
 
-  update(id: number, updateJuegoDto: UpdateJuegoDto) {
-    return this.prisma.juego.update({
-      where: { id },
-      data: updateJuegoDto,
-    });
-  }
+  // update(id: number, updateJuegoDto: UpdateJuegoDto) {
+  //   return this.prisma.juego.update({
+  //     where: { id },
+  //     data: updateJuegoDto,
+  //   });
+  // }
 
   remove(id: number) {
     return this.prisma.juego.delete({where: { id }});
