@@ -25,6 +25,10 @@ export class JuegosService {
     return this.prisma.juego.findMany();
   }
 
+  findAllByJugadorId(id: number) {
+    return this.prisma.juego.findMany({where: { id } });
+  }
+
   findOne(id: number) {
     return this.prisma.juego.findUnique({where: { id } });
   }

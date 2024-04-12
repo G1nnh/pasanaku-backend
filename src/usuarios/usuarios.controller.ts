@@ -6,6 +6,7 @@ import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { UsuarioEntity } from './entities/usuario.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { CrearUsuarioJugadorDto } from './dto/crear-usuario-jugador.dto';
 
 
 @Controller('usuarios')
@@ -17,6 +18,12 @@ export class UsuariosController {
   @ApiCreatedResponse({ type: UsuarioEntity })
   create(@Body() createUsuarioDto: CreateUsuarioDto) {
     return this.usuariosService.create(createUsuarioDto);
+  }
+
+  @Post('crear-usuario-jugador')
+  @ApiCreatedResponse({ type: UsuarioEntity })
+  crearUsuarioJugador(@Body() crearUsuarioJugador: CrearUsuarioJugadorDto) {
+    return this.usuariosService.crearUsuarioJugador(crearUsuarioJugador);
   }
 
   @Post('invitar')
