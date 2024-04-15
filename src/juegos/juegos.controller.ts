@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req } from '@nestjs/common';
 import { JuegosService } from './juegos.service';
 import { CreateJuegoDto } from './dto/create-juego.dto';
 import { UpdateJuegoDto } from './dto/update-juego.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('juegos')
 @ApiTags('juegos')
@@ -18,6 +19,17 @@ export class JuegosController {
   findAll() {
     return this.juegosService.findAll();
   }
+
+
+  // modificar (mal creado) *********
+  @Get('juegos-jugador')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  async findAllByJugadorId(@Req() request: any) {
+    const jugadorId = request.user.id;
+    return await this.juegosService.findAllByJugadorId(jugadorId);
+  }
+  // ********************
 
   @Get(':id')
   findOne(@Param('id') id: string) {
