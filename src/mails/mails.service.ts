@@ -19,7 +19,7 @@ export class MailsService {
   async sendInviteMail(user: string, email: string) {
     let infoMail: any;
     try {
-      const url = "https://drive.google.com/file/d/10lBHx0iKs80a8RmNy43ym69YMJ2ByXAK/view?usp=sharing";
+      const url = "https://drive.google.com/drive/folders/1B0gg719YmfHvxvy6GNQxnVVqi2W4Q9Vu?usp=drive_link";
       infoMail = await this.mailerService.sendMail({
         to: email,
         subject: 'Invitación al juego pasanaku',
