@@ -1,9 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateInvitacioneDto {
-    
-    @ApiProperty()
-    fechaHoraInvitacion: Date;
+   
     @ApiProperty()
     participanteId: number;
     @ApiProperty()
@@ -11,11 +9,7 @@ export class CreateInvitacioneDto {
     @ApiProperty()
     telefono: string;
     @ApiProperty()
-    descripcion: string;
-    @ApiProperty()
-    enlace: string;
-    @ApiProperty()
-    fechaExpiracion: Date;
-    @ApiProperty()
     estadoId: number;
+    @ApiProperty()
+    nombre: string;
 }

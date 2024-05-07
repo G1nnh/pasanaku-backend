@@ -14,6 +14,11 @@ export class InvitacionesController {
     return this.invitacionesService.create(createInvitacioneDto);
   }
 
+  @Post('/reenvio')
+  reenvio(@Body() createInvitacioneDto: CreateInvitacioneDto) {
+    return this.invitacionesService.reenvio(createInvitacioneDto);
+  }
+
   @Get()
   findAll() {
     return this.invitacionesService.findAll();
